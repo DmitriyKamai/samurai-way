@@ -1,7 +1,7 @@
 import React from "react";
 import s from './Header.module.css';
 
-function Header() {
+const Header = () => {
     return (
       <header className={s.header}>
         <a href="" className={s.homepageLink}>

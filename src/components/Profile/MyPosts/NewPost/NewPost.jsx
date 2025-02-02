@@ -1,7 +1,7 @@
 import React from "react";
 import s from './NewPost.module.css';
 
-function NewPost() {
+const NewPost = () => {
     return (
         <form className={s.newPost}>
           <div className={s.newPostTitle}>Новый пост</div>

@@ -2,7 +2,7 @@ import React from "react";
 import s from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
 
-function Profile() {
+const Profile = () => {
     return (
       <main className={s.profile}>
       <div className={s.wallpaperWrapper}>
