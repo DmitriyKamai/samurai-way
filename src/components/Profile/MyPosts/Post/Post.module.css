@@ -1,0 +1,44 @@
+  .post {
+    position: relative;
+    max-width: 800px;
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--gray-900);
+    border: 1px solid var(--gray-500);
+  }
+
+  .postContent {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .postAva {
+    margin-left: 0.5rem;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    outline: 1px solid var(--gray-100)
+  }
+  
+  .postText {
+    margin-left: 1rem;
+    font-size: 1.6rem;
+  }
+
+  .like {
+    position: absolute;
+    bottom: -1rem;
+    right: 2rem;
+    padding: 0.5rem;
+  }
+
+  .delete {
+    font-size: 1.6rem;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 1rem;
+    right: 0.5rem;
+  }

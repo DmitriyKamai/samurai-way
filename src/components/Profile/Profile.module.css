@@ -1,0 +1,53 @@
+
+.profile {
+    width: 100%;
+    max-width: 800px;
+    margin-right: 1rem;
+    border-radius: 1rem;
+    grid-area: main;
+    background-color: var(--gray-800);
+    overflow: hidden;
+  }
+  
+  .wallpaper {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .wrapper {
+    padding: 1.5rem;
+  }
+  
+  .mainBlock {
+    display: flex;
+    gap: 1.5rem
+  }
+  
+  .descItem {
+    display: block;
+    font-size: 1.6rem;
+    margin-top: 1rem;
+  }
+  
+  .info {
+  }
+  
+  .ava {
+    border-radius: 0.5rem;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .name {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  @media (min-width: 992px) {
+  
+    .profile {
+      margin: 0 auto;
+    }
+  }

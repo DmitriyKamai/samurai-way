@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    align-items: center;
+    grid-area: header;
+    background-color: var(--gray-800);
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    
+  }
+  
+  .homepageLink {
+    font-size: 3rem;
+    margin-left: 4rem;
+  }
