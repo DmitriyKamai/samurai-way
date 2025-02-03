@@ -1,5 +1,8 @@
   .myPosts {
-  
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 2rem;
     margin-left: auto;
     margin-right: auto;

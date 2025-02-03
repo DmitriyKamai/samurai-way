@@ -1,16 +1,88 @@
 .dialogs {
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   height: 80vh;
 }
-.contacts {
-  flex-grow: 1;
-  border-right: 1px solid var(--gray-100);
+.dialogsItems {
+  grid-column: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-width: thin;          /* "auto" или "thin" */
+  scrollbar-color: var(--gray-800) var(--gray-700);   /* цвет бегунка и зоны отслеживания */
+}
+
+.dialog {
+  display: flex;
+  max-height: 70px;
+  max-width: 100%;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--gray-100);
+  cursor: pointer;
+}
+
+.dialogsItems .active {
+  background-color: var(--gray-600);
+}
+
+.dialog:hover {
+  background-color: var(--gray-600);
+}
+
+.dialogAva {
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  outline: 1px solid var(--gray-100)
+}
+
+.dialogBody {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.dialogName {
+  font-weight: 600;
+  font-size: 1.4rem;
+  max-width: 72%;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  overflow: hidden;
+}
+
+.msgPreview {
+  scrollbar-width: 0;
+  max-height: 40px;
+  max-width: 72%;
+  font-size: 1.2rem;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 15px; /* Ширина всего элемента навигации */
+}
+
+body::-webkit-scrollbar-track {
+  background: #fff; /* Цвет дорожки */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #050c26; /* Цвет бегунка */
+  border-radius: 20px; /* Округление бегунка */
+  border: 3px solid #050c26; /* Оформление границ бегунка */
 }
 
 .messages {
   display: flex;
   flex-direction: column;
-  flex-grow: 3;
+  grid-column: 2;
 }
 
 .title {
@@ -26,7 +98,32 @@
   flex-grow: 1;
   padding: 1.5rem;
   background-image: url(./messages_bg.svg);
+  background-size: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
+.message {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.messageAva {
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  outline: 1px solid var(--gray-100)
+}
+
+.messageText {
+  background-color: var(--gray-500);
+  padding: 1rem;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
 }
 
 .newMessage {
@@ -56,5 +153,5 @@
 }
 
 .sendMessage {
-
+  font-size: 1.6rem;
 }
