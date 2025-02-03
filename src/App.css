@@ -68,9 +68,9 @@ button:hover {
 @media (min-width: 992px) {
   .app-wrapper {
     grid-template-areas: 
-    "nav c header header header header header header d sidebar"
-    "nav c main main main main main main d sidebar";
+    "nav c  header header header header  d sidebar"
+    "nav c  main main main main  d sidebar";
     grid-template-rows: 90px 1fr;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: repeat(8, 1fr);
   }
 }

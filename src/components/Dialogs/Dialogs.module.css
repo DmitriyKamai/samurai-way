@@ -1,8 +1,7 @@
 .dialogs {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 3fr;
-  height: 80vh;
+  grid-template-columns: 1fr 2fr;
 }
 .dialogsItems {
   grid-column: 1;
@@ -13,16 +12,17 @@
 }
 
 .dialog {
+  position: relative;
   display: flex;
   max-height: 70px;
   max-width: 100%;
   gap: 1rem;
   padding: 0.5rem 1rem;
-  border-bottom: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--gray-400);
   cursor: pointer;
 }
 
-.dialogsItems .active {
+.dialog:has(.active)  {
   background-color: var(--gray-600);
 }
 
@@ -81,6 +81,7 @@ body::-webkit-scrollbar-thumb {
 
 .messages {
   display: flex;
+  height: fit-content;
   flex-direction: column;
   grid-column: 2;
 }
@@ -90,21 +91,23 @@ body::-webkit-scrollbar-thumb {
   padding: 1.5rem;
   width: 100%;
   font-size: 2rem;
-  border-bottom: 1px solid var(--gray-100);
+  border-bottom: 1px solid var(--gray-400);
   line-height: 1;
 }
 
 .messagesArea {
+  max-height: 60vh;
   flex-grow: 1;
   padding: 1.5rem;
   background-image: url(./messages_bg.svg);
   background-size: 160px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  overflow-y: scroll;
+  scrollbar-width: thin;          /* "auto" или "thin" */
+  scrollbar-color: var(--gray-800) var(--gray-700);   /* цвет бегунка и зоны отслеживания */
 }
 
 .message {
+  margin-top: 1rem;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -120,7 +123,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .messageText {
-  background-color: var(--gray-500);
+  background-color: var(--gray-700);
   padding: 1rem;
   font-size: 1.6rem;
   border-radius: 0.5rem;
@@ -128,14 +131,13 @@ body::-webkit-scrollbar-thumb {
 
 .newMessage {
   display: flex;
+  height: 150px;
   flex-direction: column;
   align-items: flex-end;
   padding: 1rem;
   gap: 1rem;
-  border-top: 1px solid var(--gray-100);
+  border-top: 1px solid var(--gray-400);
 }
-
-
 
 .newMessageArea {
   padding: 1rem;
