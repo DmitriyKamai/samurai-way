@@ -10,6 +10,10 @@ const Dialogs = (props) => {
         <div className={s.messages}>
           <h2 className={s.title}>Messages</h2>
           <div className={s.messagesArea}></div>
+          <form action="" className={s.newMessage}>
+            <textarea className={s.newMessageArea} placeholder="Write message" name="newMessageArea" id="newMessageArea" />
+            <button className={s.sendMessage}>Send</button>
+          </form>
         </div>
       </main>
     )
