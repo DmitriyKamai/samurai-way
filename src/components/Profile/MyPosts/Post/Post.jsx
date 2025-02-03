@@ -9,8 +9,9 @@ const Post = (props) => {
             <img src="https://i.ibb.co/CDYzqYW/2025-01-29-222000471.png" alt="" className={s.postAva} />
             <div className={s.postText}>{props.message}</div>
           </div>
-          <div>
-            <button className={s.like}>Like</button>
+          <div className={s.likes}>
+            <span className={s.showLikes}>{props.likesAmount}</span>
+            <button className={s.likeButton}>&#10084;</button>
           </div>
         </div>
     )

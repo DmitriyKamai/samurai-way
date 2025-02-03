@@ -1,13 +1,5 @@
 
-.profile {
-    width: 100%;
-    max-width: 800px;
-    margin-right: 1rem;
-    border-radius: 1rem;
-    grid-area: main;
-    background-color: var(--gray-800);
-    overflow: hidden;
-  }
+
   
   .wallpaper {
     width: 100%;

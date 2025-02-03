@@ -7,8 +7,8 @@ const MyPosts = () => {
     return (
       <div className={s.myPosts}>
         <NewPost />
-        <Post message='Сегодня ел влажные корма.' />
-        <Post message='Вчера ел сгущёнку с Богданчоусом' />
+        <Post likesAmount='23' message='Сегодня ел влажные корма.' />
+        <Post likesAmount='3213' message='Вчера ел сгущёнку с Богданчоусом' />
       </div>
     )
 }
