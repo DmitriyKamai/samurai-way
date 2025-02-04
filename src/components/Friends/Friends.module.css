@@ -1,0 +1,26 @@
+.friends {
+    grid-area: sidebar;
+    position: sticky;
+    top: 1rem;
+    height: fit-content;
+    background-color: var(--gray-800);
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    overflow: hidden;
+}
+
+.title {
+    font-size: 1.6rem;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--gray-400);
+    padding: 2rem;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: flex-start;
+    padding: 2rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}

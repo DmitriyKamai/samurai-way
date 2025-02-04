@@ -10,6 +10,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
+import Friends from './components/Friends/Friends';
 
 const App = (props) => {
   return (
@@ -17,6 +18,7 @@ const App = (props) => {
       <div className="app-wrapper">
         <Header />
         <Navbar />
+        <Friends friends={props.state.sidebar.friends} />
         <div className='app-wrapper-content'>
           <Route path='/profile' render={() => <Profile state={props.state.profilePage} />} />
           <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />} />
