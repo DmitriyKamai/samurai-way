@@ -1,13 +1,13 @@
 import React from "react";
 import s from './NewPost.module.css';
 
-const NewPost = () => {
+const NewPost = (props) => {
 
   let newPostElement = React.createRef();
 
   let addNewPost = () => {
-    let text = newPostElement.current.value;
-    
+    let text = newPostElement.current.value
+    props.addPost(text);
   };
     return (
         <form className={s.newPost}>

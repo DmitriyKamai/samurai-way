@@ -1,20 +1,22 @@
 let state = {
-  profilePage: {
-    userInfo: {
+  users: [
+    {
       id: 0,
       name: "Валерий Лохматый",
       wallpaperImgSrc: 'https://niti-d.by/wp-content/uploads/2020/10/15.1.jpg',
       avatarImgSrc: 'https://i.ibb.co/CDYzqYW/2025-01-29-222000471.png'
-    },
+    }
+  ],
+  profilePage: {
     posts: [
       {
-        id: 1, likesCount: '23', message: 'Сегодня ел влажные корма.'
+        id: 1, likesCount: 23, message: 'Сегодня ел влажные корма.'
       },
       {
-        id: 2, likesCount: '3213', message: 'Вчера ел сгущёнку с Богданчоусом'
+        id: 2, likesCount: 3213, message: 'Вчера ел сгущёнку с Богданчоусом'
       },
       {
-        id: 3, likesCount: '223', message: 'Сегодня встречался с Дашей за гаражами'
+        id: 3, likesCount: 223, message: 'Сегодня встречался с Дашей за гаражами'
       }
     ]
   },
@@ -97,5 +99,15 @@ let state = {
     ]
   }
 }
+
+
+export let addPost = (postText) => {
+  let newPost = {
+    id: 5,
+    likesCount: 0,
+    message: postText
+  };
+  state.profilePage.posts.push(newPost);
+};
 
 export default state;
