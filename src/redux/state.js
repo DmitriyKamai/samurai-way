@@ -1,5 +1,11 @@
 let state = {
   profilePage: {
+    userInfo: {
+      id: 0,
+      name: "Валерий Лохматый",
+      wallpaperImgSrc: 'https://niti-d.by/wp-content/uploads/2020/10/15.1.jpg',
+      avatarImgSrc: 'https://i.ibb.co/CDYzqYW/2025-01-29-222000471.png'
+    },
     posts: [
       {
         id: 1, likesCount: '23', message: 'Сегодня ел влажные корма.'
@@ -82,7 +88,13 @@ let state = {
         id: 3,
         name: "Даша Рублёва",
         imgSrc: "https://i.ytimg.com/vi/Deazgd2DRlI/maxresdefault.jpg"
-      }]
+      },
+      {
+        id: 4,
+        name: "Маша Копейкина",
+        imgSrc: "https://avatars.dzeninfra.ru/get-zen_doc/271828/pub_6526807c5f13c138b5e613e5_652681c0c095b8411a5c6cba/scale_1200"
+      }
+    ]
   }
 }
 

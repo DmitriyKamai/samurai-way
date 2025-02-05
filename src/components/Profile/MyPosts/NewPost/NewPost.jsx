@@ -2,11 +2,18 @@ import React from "react";
 import s from './NewPost.module.css';
 
 const NewPost = () => {
+
+  let newPostElement = React.createRef();
+
+  let addNewPost = () => {
+    let text = newPostElement.current.value;
+    
+  };
     return (
         <form className={s.newPost}>
           <div className={s.newPostTitle}>New post</div>
-          <textarea className={s.newPostArea} placeholder="Write message" name="newPostArea" id="newPostArea"></textarea>
-          <button className={s.sendNewPost}>Add new post</button>
+          <textarea ref={newPostElement} className={s.newPostArea} placeholder="Write message" name="newPostArea"></textarea>
+          <button className={s.sendNewPost} onClick={addNewPost}>Add new post</button>
         </form>
     )
 }

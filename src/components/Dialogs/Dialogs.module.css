@@ -128,14 +128,13 @@ body::-webkit-scrollbar-thumb {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.otherUserMessage {
   justify-self: flex-start;
 }
 
 .selfMessage {
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
   justify-self: flex-end;
 }
 
@@ -146,6 +145,14 @@ body::-webkit-scrollbar-thumb {
   object-fit: cover;
   border-radius: 50%;
   outline: 1px solid var(--gray-100)
+}
+
+.avaLeft {
+  order: 0;
+}
+
+.avaRight {
+  order: 1
 }
 
 .messageText {
