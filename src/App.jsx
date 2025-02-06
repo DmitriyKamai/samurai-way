@@ -17,10 +17,10 @@ const App = (props) => {
     <div className="app-wrapper">
       <Header />
       <Navbar />
-      <Friends storage={props.storage} />
+      <Friends state={props.state} storage={props.storage} />
       <div className='app-wrapper-content'>
-        <Route path='/profile' render={() => <Profile storage={props.storage} />} />
-        <Route path='/dialogs' render={() => <Dialogs storage={props.storage} />} />
+        <Route path='/profile' render={() => <Profile state={props.state} storage={props.storage} />} />
+        <Route path='/dialogs' render={() => <Dialogs state={props.state} storage={props.storage} />} />
         <Route path='/News' render={() => <News />} />
         <Route path='/Music' render={() => <Music />} />
         <Route path='/Settings' render={() => <Settings />} />

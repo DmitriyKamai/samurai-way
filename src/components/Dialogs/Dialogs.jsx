@@ -6,10 +6,11 @@ import DialogItem from "./DialogItem/DialogItem";
 
 const Dialogs = (props) => {
 
-  let dialogsElements = props.storage.state.dialogs.map(dialog => {
-    return <DialogItem id={dialog.id} name={dialog.name} lastMsg={dialog.messages[dialog.messages.length - 1].message} imgSrc={dialog.imgSrc} />;
+  let dialogsElements = props.state.dialogs.map(dialog => {
+    let lastMsg = dialog.messages[dialog.messages.length - 1];
+    return <DialogItem id={dialog.id} name={dialog.name} lastMsg={lastMsg.authorId?lastMsg.message:`You: ${lastMsg.message}`} imgSrc={dialog.imgSrc} />;
   })
-  let messagesElements = props.storage.state.dialogs[0].messages.map(message => <MessageItem authorId={message.authorId} id={message.id} message={message.message} imgSrc={props.storage.state.dialogs[0].imgSrc} />);
+  let messagesElements = props.state.dialogs[0].messages.map(message => <MessageItem authorId={message.authorId} id={message.id} message={message.message} imgSrc={props.state.dialogs[0].imgSrc} />);
 
   let newMessageElement = React.createRef();
   let addNewMessage = (e) => {
@@ -34,7 +35,7 @@ const Dialogs = (props) => {
           {messagesElements}
         </div>
         <form action="" className={s.newMessage}>
-          <textarea onChange={onMessageChange} ref={newMessageElement} className={s.newMessageArea} placeholder="Write message" value={props.storage.state.dialogs[0].unsentMessage} />
+          <textarea onChange={onMessageChange} ref={newMessageElement} className={s.newMessageArea} placeholder="Write message" value={props.state.dialogs[0].unsentMessage} />
           <button onClick={addNewMessage} className={s.sendMessage}>Send message</button>
         </form>
       </div>

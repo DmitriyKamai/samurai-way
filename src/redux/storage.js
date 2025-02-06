@@ -1,5 +1,5 @@
 let storage = {
-  state: {
+  _state: {
     id: 0,
     name: "Валерий Лохматый",
     wallpaperImgSrc: 'https://niti-d.by/wp-content/uploads/2020/10/15.1.jpg',
@@ -50,6 +50,11 @@ let storage = {
             id: 2,
             authorId: 0,
             message: "Не хочу, ты играешь как лох",
+          },
+          {
+            id: 3,
+            authorId: 1,
+            message: "НУ ПОШЛИ В ДОТУ Я БУДУ НОРМ ИГРАТЬ",
           }
         ]
       },
@@ -95,46 +100,50 @@ let storage = {
     ]
   },
 
-  rerenderEntireTree: null,
+  _callSubscriber: null,
+
+  getState() {
+    return this._state;
+  },
 
   addPost() {
-    if (this.state.newPostText.length) {
+    if (this._state.newPostText.length) {
       const newPost = {
         id: 5,
         likesCount: 0,
-        message: this.state.newPostText
+        message: this._state.newPostText
       };
-      this.state.posts.push(newPost);
-      this.state.newPostText = "";
+      this._state.posts.push(newPost);
+      this._state.newPostText = "";
     }
-    this.rerenderEntireTree(this.state);
+    this._callSubscriber(this._state);
   },
 
   setNewPostText(newText) {
-    this.state.newPostText = newText;
-    this.rerenderEntireTree(this.state);
+    this._state.newPostText = newText;
+    this._callSubscriber(this._state);
   },
 
   addMessage() {
-    if (this.state.dialogs[0].unsentMessage.length) {
+    if (this._state.dialogs[0].unsentMessage.length) {
       const newMessage = {
         id: 3,
         authorId: 0,
-        message: this.state.dialogs[0].unsentMessage
+        message: this._state.dialogs[0].unsentMessage
       };
-      this.state.dialogs[0].messages.push(newMessage);
-      this.state.dialogs[0].unsentMessage = "";
+      this._state.dialogs[0].messages.push(newMessage);
+      this._state.dialogs[0].unsentMessage = "";
     }
-    this.rerenderEntireTree(this.state);
+    this._callSubscriber(this._state);
   },
 
   setNewMessage(newText) {
-    this.state.dialogs[0].unsentMessage = newText;
-    this.rerenderEntireTree(this.state);
+    this._state.dialogs[0].unsentMessage = newText;
+    this._callSubscriber(this._state);
   },
 
   subscribe(observer) {
-    this.rerenderEntireTree = observer;
+    this._callSubscriber = observer;
   }
 }
 

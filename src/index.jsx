@@ -8,11 +8,11 @@ import storage from './redux/storage';
 let rerenderEntireTree = (state) => {
     ReactDOM.render(
       <BrowserRouter>
-        <App storage={storage}/>
+        <App state={storage.getState()} storage={storage}/>
       </BrowserRouter>, document.getElementById('root')
     );
   }
 
-rerenderEntireTree(storage.state);
+rerenderEntireTree(storage.getState());
 
 storage.subscribe(rerenderEntireTree);
