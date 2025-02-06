@@ -3,26 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { addPost } from './redux/state';
-import { setNewPostText } from './redux/state';
-import { addMessage } from './redux/state';
-import { setNewMessage } from './redux/state';
-import state from './redux/state';
-import { subscribe } from './redux/state';
+import storage from './redux/storage';
 
 let rerenderEntireTree = (state) => {
     ReactDOM.render(
       <BrowserRouter>
-        <App
-        state={state}
-        addPost={addPost}
-        setNewPostText={setNewPostText}
-        addMessage={addMessage}
-        setNewMessage={setNewMessage}/>
+        <App storage={storage}/>
       </BrowserRouter>, document.getElementById('root')
     );
   }
 
-rerenderEntireTree(state);
+rerenderEntireTree(storage.state);
 
-subscribe(rerenderEntireTree);
+storage.subscribe(rerenderEntireTree);

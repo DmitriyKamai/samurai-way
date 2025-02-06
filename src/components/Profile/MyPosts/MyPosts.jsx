@@ -5,11 +5,11 @@ import NewPost from "./NewPost/NewPost";
 
 const MyPosts = (props) => {
 
-  let postsElements = props.posts.map(post => <Post id={post.id} likesCount={post.likesCount} message={post.message} />)
+  let postsElements = props.storage.state.posts.map(post => <Post id={post.id} likesCount={post.likesCount} message={post.message} />)
 
   return (
     <div className={s.myPosts}>
-      <NewPost addPost={props.addPost} setNewPostText={props.setNewPostText} newPostText={props.newPostText}/>
+      <NewPost storage={props.storage} />
       {postsElements}
     </div>
   )
