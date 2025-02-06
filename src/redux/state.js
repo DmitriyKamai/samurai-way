@@ -1,4 +1,4 @@
-import rerenderEntireTree from "../render";
+let rerenderEntireTree;
 
 let state = {
   users: [
@@ -104,9 +104,9 @@ let state = {
 }
 
 
-export let addPost = () => {
+export const addPost = () => {
   if (state.profilePage.newPostText.length) {
-    let newPost = {
+    const newPost = {
       id: 5,
       likesCount: 0,
       message: state.profilePage.newPostText
@@ -117,9 +117,31 @@ export let addPost = () => {
   rerenderEntireTree(state);
 };
 
-export let setNewPostText = (newText) => {
+export const setNewPostText = (newText) => {
   state.profilePage.newPostText = newText;
   rerenderEntireTree(state);
+}
+
+export const addMessage = () => {
+  if (state.dialogsPage.dialogs[0].unsentMessage.length) {
+    const newMessage = {
+      id: 3,
+      authorId: 0,
+      message: state.dialogsPage.dialogs[0].unsentMessage
+    };
+    state.dialogsPage.dialogs[0].messages.push(newMessage);
+    state.dialogsPage.dialogs[0].unsentMessage = "";
+  }
+  rerenderEntireTree(state);
+};
+
+export const setNewMessage = (newText) => {
+  state.dialogsPage.dialogs[0].unsentMessage = newText;
+  rerenderEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer;
 }
 
 export default state;
