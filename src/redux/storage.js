@@ -106,44 +106,40 @@ let storage = {
     return this._state;
   },
 
-  addPost() {
-    if (this._state.newPostText.length) {
-      const newPost = {
-        id: 5,
-        likesCount: 0,
-        message: this._state.newPostText
-      };
-      this._state.posts.push(newPost);
-      this._state.newPostText = "";
-    }
-    this._callSubscriber(this._state);
-  },
-
-  setNewPostText(newText) {
-    this._state.newPostText = newText;
-    this._callSubscriber(this._state);
-  },
-
-  addMessage() {
-    if (this._state.dialogs[0].unsentMessage.length) {
-      const newMessage = {
-        id: 3,
-        authorId: 0,
-        message: this._state.dialogs[0].unsentMessage
-      };
-      this._state.dialogs[0].messages.push(newMessage);
-      this._state.dialogs[0].unsentMessage = "";
-    }
-    this._callSubscriber(this._state);
-  },
-
-  setNewMessage(newText) {
-    this._state.dialogs[0].unsentMessage = newText;
-    this._callSubscriber(this._state);
-  },
-
   subscribe(observer) {
     this._callSubscriber = observer;
+  },
+
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+      if (this._state.newPostText.length) {
+        const newPost = {
+          id: 5,
+          likesCount: 0,
+          message: this._state.newPostText
+        };
+        this._state.posts.push(newPost);
+        this._state.newPostText = "";
+      }
+      this._callSubscriber(this._state);
+    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+      this._state.newPostText = action.newText;
+      this._callSubscriber(this._state);
+    } else if (action.type === 'ADD-MESSAGE') {
+      if (this._state.dialogs[0].unsentMessage.length) {
+        const newMessage = {
+          id: 3,
+          authorId: 0,
+          message: this._state.dialogs[0].unsentMessage
+        };
+        this._state.dialogs[0].messages.push(newMessage);
+        this._state.dialogs[0].unsentMessage = "";
+      }
+      this._callSubscriber(this._state);
+    } else if (action.type === 'UPDATE-NEW-MESSAGE') {
+      this._state.dialogs[0].unsentMessage = action.newMessage;
+      this._callSubscriber(this._state);
+    }
   }
 }
 

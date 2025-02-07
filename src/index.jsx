@@ -8,7 +8,7 @@ import storage from './redux/storage';
 let rerenderEntireTree = (state) => {
     ReactDOM.render(
       <BrowserRouter>
-        <App state={storage.getState()} storage={storage}/>
+        <App state={storage.getState()} dispatch={storage.dispatch.bind(storage)}/>
       </BrowserRouter>, document.getElementById('root')
     );
   }
