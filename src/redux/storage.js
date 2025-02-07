@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
+
 let storage = {
   _state: {
     id: 0,
@@ -111,7 +116,7 @@ let storage = {
   },
 
   dispatch(action) {
-    if (action.type === 'ADD-POST') {
+    if (action.type === ADD_POST) {
       if (this._state.newPostText.length) {
         const newPost = {
           id: 5,
@@ -122,10 +127,10 @@ let storage = {
         this._state.newPostText = "";
       }
       this._callSubscriber(this._state);
-    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+    } else if (action.type === UPDATE_NEW_POST_TEXT) {
       this._state.newPostText = action.newText;
       this._callSubscriber(this._state);
-    } else if (action.type === 'ADD-MESSAGE') {
+    } else if (action.type === ADD_MESSAGE) {
       if (this._state.dialogs[0].unsentMessage.length) {
         const newMessage = {
           id: 3,
@@ -136,11 +141,25 @@ let storage = {
         this._state.dialogs[0].unsentMessage = "";
       }
       this._callSubscriber(this._state);
-    } else if (action.type === 'UPDATE-NEW-MESSAGE') {
+    } else if (action.type === UPDATE_NEW_MESSAGE) {
       this._state.dialogs[0].unsentMessage = action.newMessage;
       this._callSubscriber(this._state);
     }
   }
 }
+
+export const addPostActionCreator = () => ({type: ADD_POST})
+
+export const updateNewPostTextActionCreator = (text) => ({
+    type: UPDATE_NEW_POST_TEXT,
+    newText: text
+  });
+
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
+
+export const updateNewMessageActionCreator = (text) => ({
+  type: UPDATE_NEW_MESSAGE,
+  newMessage: text
+})
 
 export default storage;
