@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import storage from './redux/storage';
+import store from './redux/store';
 
 let rerenderEntireTree = (state) => {
     ReactDOM.render(
       <BrowserRouter>
-        <App state={storage.getState()} dispatch={storage.dispatch.bind(storage)}/>
+        <App state={store.getState()} dispatch={store.dispatch.bind(store)}/>
       </BrowserRouter>, document.getElementById('root')
     );
   }
 
-rerenderEntireTree(storage.getState());
+rerenderEntireTree(store.getState());
 
-storage.subscribe(rerenderEntireTree);
+store.subscribe(rerenderEntireTree);

@@ -17,7 +17,7 @@ const messagesReducer = (state, action) => {
           authorId: 0,
           message: state.dialogs[0].unsentMessage
         };
-        state.dialogs[0].messages.push(newMessage);
+        state.messages.push(newMessage);
         state.dialogs[0].unsentMessage = "";
       }
       return state

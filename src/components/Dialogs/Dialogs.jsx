@@ -2,21 +2,21 @@ import React from "react";
 import s from './Dialogs.module.css';
 import MessageItem from "./MessageItem/MessageItem";
 import DialogItem from "./DialogItem/DialogItem";
-import { addMessageActionCreator, updateNewMessageActionCreator } from "../../redux/messages-reducer";
+import { addMessageActionCreator, updateNewMessageActionCreator } from "../../redux/dialogsPage-reducer";
 
 const Dialogs = (props) => {
 
   let dialogsElements = props.state.dialogs.map(dialog => {
-    let lastMsg = dialog.messages[dialog.messages.length - 1];
+    let lastMsg = props.state.messages.filter(message => message.sender_id === dialog.dialog_id || message.receiver_id === dialog.dialog_id).at(-1);
     return <DialogItem 
-    id={dialog.id} 
+    dialog_id={dialog.id} 
     name={dialog.name} 
-    lastMsg={lastMsg.authorId?lastMsg.message:`You: ${lastMsg.message}`} 
+    lastMsg={lastMsg.sender_id?lastMsg.message:`You: ${lastMsg.message}`} 
     imgSrc={dialog.imgSrc} />;
   })
-  let messagesElements = props.state.dialogs[0].messages.map(message => <MessageItem 
-    authorId={message.authorId} 
-    id={message.id} 
+  let messagesElements = props.state.messages.map(message => <MessageItem 
+    sender_id={message.sender_id} 
+    message_id={message.message_id} 
     message={message.message}
     imgSrc={props.state.dialogs[0].imgSrc} />);
 
