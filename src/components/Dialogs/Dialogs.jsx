@@ -2,10 +2,8 @@ import React from "react";
 import s from './Dialogs.module.css';
 import MessageItem from "./MessageItem/MessageItem";
 import DialogItem from "./DialogItem/DialogItem";
-import { addMessageActionCreator, updateNewMessageActionCreator } from "../../redux/dialogsPage-reducer";
 
 const Dialogs = (props) => {
-
   let dialogsElements = props.state.dialogs.map(dialog => {
     let lastMsg = props.state.messages.filter(message => message.sender_id === dialog.dialog_id || message.receiver_id === dialog.dialog_id).at(-1);
     return <DialogItem 
@@ -21,13 +19,13 @@ const Dialogs = (props) => {
     imgSrc={props.state.dialogs[0].imgSrc} />);
 
   let newMessageElement = React.createRef();
-  let addNewMessage = () => {
-    props.dispatch(addMessageActionCreator());
+  let onAddMessage = () => {
+    props.addMessage();
   };
 
   let onMessageChange = () => {
     let text = newMessageElement.current.value;
-    props.dispatch(updateNewMessageActionCreator(text));
+    props.changeMessage(text);
   };
 
   return (
@@ -43,7 +41,7 @@ const Dialogs = (props) => {
         </div>
         <div className={s.newMessage}>
           <textarea onChange={onMessageChange} ref={newMessageElement} className={s.newMessageArea} placeholder="Write message" value={props.state.dialogs[0].unsentMessage} />
-          <button onClick={addNewMessage} className={s.sendMessage}>Send message</button>
+          <button onClick={onAddMessage} className={s.sendMessage}>Send message</button>
         </div>
       </div>
     </main>

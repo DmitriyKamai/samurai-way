@@ -1,14 +1,14 @@
 import { combineReducers, createStore } from "redux";
-import postsReducer from "./profilePage-reducer";
-import messagesReducer from "./dialogsPage-reducer";
+import profileReducer from "./profilePage-reducer";
+import dialogsReducer from "./dialogsPage-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
 let reducers = combineReducers({
-    postsReducer,
-    messagesReducer,
-    sidebarReducer
+    profilePage: profileReducer,
+    dialogsPage: dialogsReducer,
+    sidebar: sidebarReducer
 });
 
-let store = createStore();
+let store = createStore(reducers);
 
 export default store;

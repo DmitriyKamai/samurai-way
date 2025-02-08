@@ -1,15 +1,15 @@
 import React from "react";
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import NewPost from "./NewPost/NewPost";
+import NewPostContainer from "./NewPost/NewPostContainer";
 
 const MyPosts = (props) => {
-
-  let postsElements = props.state.posts.map(post => <Post id={post.post_id} likesCount={post.likesCount} message={post.message} />)
+  let state = props.store.getState();
+  let postsElements = state.profilePage.posts.map(post => <Post id={post.post_id} likesCount={post.likesCount} message={post.message} />)
 
   return (
     <div className={s.myPosts}>
-      <NewPost state={props.state} dispatch={props.dispatch} />
+      <NewPostContainer store={props.store}/>
       {postsElements}
     </div>
   )
