@@ -2,7 +2,7 @@ import React from "react";
 import s from './Dialogs.module.css';
 import MessageItem from "./MessageItem/MessageItem";
 import DialogItem from "./DialogItem/DialogItem";
-import { addMessageActionCreator, updateNewMessageActionCreator } from "../../redux/storage";
+import { addMessageActionCreator, updateNewMessageActionCreator } from "../../redux/messages-reducer";
 
 const Dialogs = (props) => {
 
@@ -21,8 +21,7 @@ const Dialogs = (props) => {
     imgSrc={props.state.dialogs[0].imgSrc} />);
 
   let newMessageElement = React.createRef();
-  let addNewMessage = (e) => {
-    e.preventDefault();
+  let addNewMessage = () => {
     props.dispatch(addMessageActionCreator());
   };
 
@@ -42,10 +41,10 @@ const Dialogs = (props) => {
         <div className={s.messagesArea}>
           {messagesElements}
         </div>
-        <form action="" className={s.newMessage}>
+        <div className={s.newMessage}>
           <textarea onChange={onMessageChange} ref={newMessageElement} className={s.newMessageArea} placeholder="Write message" value={props.state.dialogs[0].unsentMessage} />
           <button onClick={addNewMessage} className={s.sendMessage}>Send message</button>
-        </form>
+        </div>
       </div>
     </main>
   )

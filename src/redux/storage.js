@@ -1,7 +1,5 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
+import messagesReducer from "./messages-reducer";
+import postsReducer from "./posts-reducer";
 
 let storage = {
   _state: {
@@ -116,50 +114,11 @@ let storage = {
   },
 
   dispatch(action) {
-    if (action.type === ADD_POST) {
-      if (this._state.newPostText.length) {
-        const newPost = {
-          id: 5,
-          likesCount: 0,
-          message: this._state.newPostText
-        };
-        this._state.posts.push(newPost);
-        this._state.newPostText = "";
-      }
-      this._callSubscriber(this._state);
-    } else if (action.type === UPDATE_NEW_POST_TEXT) {
-      this._state.newPostText = action.newText;
-      this._callSubscriber(this._state);
-    } else if (action.type === ADD_MESSAGE) {
-      if (this._state.dialogs[0].unsentMessage.length) {
-        const newMessage = {
-          id: 3,
-          authorId: 0,
-          message: this._state.dialogs[0].unsentMessage
-        };
-        this._state.dialogs[0].messages.push(newMessage);
-        this._state.dialogs[0].unsentMessage = "";
-      }
-      this._callSubscriber(this._state);
-    } else if (action.type === UPDATE_NEW_MESSAGE) {
-      this._state.dialogs[0].unsentMessage = action.newMessage;
-      this._callSubscriber(this._state);
-    }
+    this._state = messagesReducer(this._state, action);
+    this._state = postsReducer(this._state, action);
+    
+    this._callSubscriber(this._state);
   }
 }
-
-export const addPostActionCreator = () => ({type: ADD_POST})
-
-export const updateNewPostTextActionCreator = (text) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-  });
-
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
-
-export const updateNewMessageActionCreator = (text) => ({
-  type: UPDATE_NEW_MESSAGE,
-  newMessage: text
-})
 
 export default storage;
