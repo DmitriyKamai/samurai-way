@@ -79,20 +79,25 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_MESSAGE:
-      if (state.dialogs[0].unsentMessage.length) {
+    case ADD_MESSAGE: {
+      let stateCopy = {...state};
+      stateCopy.dialogs = [...state.dialogs];
+      stateCopy.messages = [...state.messages];
+      if (stateCopy.dialogs[0].unsentMessage.length) {
         const newMessage = {
-          id: 3,
-          authorId: 0,
+          message_id: 3,
+          receiver_id: 1,
+          sender_id: 0,
           message: state.dialogs[0].unsentMessage
         };
-        state.messages.push(newMessage);
-        state.dialogs[0].unsentMessage = "";
+        stateCopy.messages.push(newMessage);
+        stateCopy.dialogs[0].unsentMessage = "";
       }
-      return state
-    case UPDATE_NEW_MESSAGE:
+      return stateCopy;
+    }
+    case UPDATE_NEW_MESSAGE: 
       state.dialogs[0].unsentMessage = action.newMessage;
-      return state
+      return state;
     default:
       return state;
   }
