@@ -7,13 +7,15 @@ const Dialogs = (props) => {
   let dialogsElements = props.state.dialogs.map(dialog => {
     let lastMsg = props.state.messages.filter(message => message.sender_id === dialog.dialog_id || message.receiver_id === dialog.dialog_id).at(-1);
     return <DialogItem 
-    dialog_id={dialog.id} 
+    dialog_id={dialog.dialog_id} 
     name={dialog.name} 
+    key={dialog.dialog_id}
     lastMsg={lastMsg.sender_id?lastMsg.message:`You: ${lastMsg.message}`} 
     imgSrc={dialog.imgSrc} />;
   })
   let messagesElements = props.state.messages.map(message => <MessageItem 
     sender_id={message.sender_id} 
+    key={message.message_id}
     message_id={message.message_id} 
     message={message.message}
     imgSrc={props.state.dialogs[0].imgSrc} />);

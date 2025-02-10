@@ -5,7 +5,7 @@ const Header = () => {
     return (
       <header className={s.header}>
         <a href="" className={s.homepageLink}>
-          MySocial!
+          Catsbook
         </a>
       </header>
     )

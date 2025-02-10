@@ -3,8 +3,7 @@ import s from './Friends.module.css'
 import FriendItem from "./FriendItem/FriendItem";
 
 const Friends = (props) => {
-
-    let friendsElements = props.state.friends.map(friend => <FriendItem name={friend.name} imgSrc={friend.imgSrc} />)
+    let friendsElements = props.state.friends.map(friend => <FriendItem name={friend.name} key={friend.user_id} imgSrc={friend.avatarSrc} />)
     return <div className={s.friends}>
         <h2 className={s.title}>Friends</h2>
         <div className={s.wrapper}>
