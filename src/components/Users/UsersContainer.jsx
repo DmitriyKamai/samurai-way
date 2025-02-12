@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setUsersActionCreator, toggleFriendActionCreator, updateSearchActionCreator } from "../../redux/users-reducer";
+import { setPageActionCreator, setUsersActionCreator, toggleFriendActionCreator, updateSearchActionCreator } from "../../redux/users-reducer";
 import Users from "./Users";
 
 
@@ -19,8 +19,11 @@ const mapDispatchToProps = (dispatch) => {
     updateSearch: (text) => {
       dispatch(updateSearchActionCreator(text))
     },
-    setUsers: (users) => {
-      dispatch(setUsersActionCreator(users))
+    setUsers: (users, totalCount) => {
+      dispatch(setUsersActionCreator(users, totalCount))
+    },
+    setPage: (pageNumber) => {
+      dispatch(setPageActionCreator(pageNumber))
     }
   }
 }
