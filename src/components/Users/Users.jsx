@@ -1,9 +1,10 @@
 import React from "react";
 import s from './Users.module.css';
 import UserItem from "./UserElement/UserItem";
+import preloader from "./preloader.svg"
+
 
 const Users = (props) => {
-  console.log(props)
   const search = React.createRef();
   let pagesCount = Math.ceil(props.state.totalUsersCount / props.state.pageSize);
   let pages = [];
@@ -23,7 +24,7 @@ const Users = (props) => {
       <h1 className={s.title}>Users</h1>
       <input onChange={() => props.onUpdateSearch(search.current.value)} type="text" ref={search} value={props.state.searchUserInfo} className={s.search} placeholder="Write name"></input>
       <div className={s.userList}>
-        {props.state.findedUsers.map(user => <UserItem toggleFriend={props.toggleFriend} key={user.id} id={user.id} name={user.name} imgSrc={user.avatarSrc} isFriend={user.followed} city={user.city} />)}
+        {props.state.isFetching ? <img className={s.preloader} src={preloader} alt="" /> : props.state.findedUsers.map(user => <UserItem toggleFriend={props.toggleFriend} key={user.id} id={user.id} name={user.name} imgSrc={user.avatarSrc} isFriend={user.followed} city={user.city} />)}
       </div>
       <button className={s.showMore} onClick={() => props.showMore(props.state.currentPage + 1)}>Показать ещё</button>
     </search>

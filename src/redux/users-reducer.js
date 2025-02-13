@@ -2,6 +2,7 @@ const TOGGLE_FRIEND = 'TOGGLE-FRIEND';
 const UPDATE_SEARCH = 'UPDATE-SEARCH';
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 
 export const toggleFriendActionCreator = (user_id) => ({
   type: TOGGLE_FRIEND,
@@ -24,6 +25,11 @@ export const setPageActionCreator = (pageNumber) => ({
   pageNumber
 })
 
+export const toggleIsFetchingActionCreator = (status) => ({
+  type: TOGGLE_IS_FETCHING,
+  status
+})
+
 
 let initialState = {
   searchUserInfo: "",
@@ -32,7 +38,8 @@ let initialState = {
   friends: [],
   pageSize: 8,
   totalUsersCount: 0,
-  currentPage: 1
+  currentPage: 1,
+  isFetching: false
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -63,6 +70,9 @@ const usersReducer = (state = initialState, action) => {
       stateCopy.users = [...action.users];
       stateCopy.totalUsersCount = action.totalCount;
       stateCopy.findedUsers = stateCopy.users.filter(user => stateCopy.searchUserInfo ? user.name.toLowerCase().includes(stateCopy.searchUserInfo.toLowerCase()) : true);
+      return stateCopy;
+    case TOGGLE_IS_FETCHING:
+      stateCopy.isFetching = action.status;
       return stateCopy;
     case SET_CURRENT_PAGE:
       stateCopy.currentPage = action.pageNumber;
