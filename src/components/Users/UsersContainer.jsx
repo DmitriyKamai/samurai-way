@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setPageActionCreator, toggleIsFetchingActionCreator, setUsersActionCreator, toggleFriendActionCreator, updateSearchActionCreator } from "../../redux/users-reducer";
+import { setPage, toggleIsFetching, setUsers, toggleFriend, updateSearch } from "../../redux/users-reducer";
 import Users from "./Users";
 import * as axios from 'axios';
 
@@ -38,12 +38,12 @@ class UsersComponent extends React.Component {
   }
   render() {
     return <Users
-        state={this.props.state}
-        onUpdateSearch={this.onUpdateSearch}
-        onSetPage={this.onSetPage}
-        showMore={this.showMore}
-        toggleFriend={this.props.toggleFriend}
-      />
+      state={this.props.state}
+      onUpdateSearch={this.onUpdateSearch}
+      onSetPage={this.onSetPage}
+      showMore={this.showMore}
+      toggleFriend={this.props.toggleFriend}
+    />
   }
 }
 
@@ -53,28 +53,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleFriend: (user_id) => {
-      dispatch(toggleFriendActionCreator(user_id))
-    },
-    updateSearch: (text) => {
-      dispatch(updateSearchActionCreator(text))
-    },
-    setUsers: (users, totalCount) => {
-      dispatch(setUsersActionCreator(users, totalCount))
-    },
-    setPage: (pageNumber) => {
-      dispatch(setPageActionCreator(pageNumber))
-    },
-    toggleIsFetching: (status) => {
-      dispatch(toggleIsFetchingActionCreator(status))
-    }
-  }
-}
-
-
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersComponent)
+const UsersContainer = connect(mapStateToProps,
+  { toggleFriend, updateSearch, setUsers, setPage, toggleIsFetching }
+)(UsersComponent)
 
 
 export default UsersContainer;

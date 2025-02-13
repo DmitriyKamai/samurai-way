@@ -4,32 +4,31 @@ const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
 
-export const toggleFriendActionCreator = (user_id) => ({
+export const toggleFriend = (user_id) => ({
   type: TOGGLE_FRIEND,
   user_id
 });
 
-export const updateSearchActionCreator = (text) => ({
+export const updateSearch = (text) => ({
   type: UPDATE_SEARCH,
   text
 });
 
-export const setUsersActionCreator = (users, totalCount) => ({
+export const setUsers = (users, totalCount) => ({
   type: SET_USERS,
   users,
   totalCount
 })
 
-export const setPageActionCreator = (pageNumber) => ({
+export const setPage = (pageNumber) => ({
   type: SET_CURRENT_PAGE,
   pageNumber
 })
 
-export const toggleIsFetchingActionCreator = (status) => ({
+export const toggleIsFetching = (status) => ({
   type: TOGGLE_IS_FETCHING,
   status
 })
-
 
 let initialState = {
   searchUserInfo: "",
