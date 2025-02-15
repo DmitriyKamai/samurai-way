@@ -6,13 +6,17 @@ import s from './Profile.module.css';
 import { setUserProfile } from "../../redux/profilePage-reducer";
 import * as axios from 'axios';
 import { toggleIsFetching } from "../../redux/users-reducer";
+import { withRouter } from "react-router-dom";
+import MyPosts from "./MyPosts/MyPosts";
 
 
 class ProfileComponent extends React.Component {
 
   componentDidMount() {
     this.props.toggleIsFetching(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+    let userId = this.props.match.params.userId;
+    if (!userId) userId = 2;
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
       .then(response => {
         this.props.toggleIsFetching(false);
         this.props.setUserProfile(response.data);
@@ -22,7 +26,7 @@ class ProfileComponent extends React.Component {
   render() {
     return  <main className={s.profile}>
       <ProfileInfo {...this.props} />
-      <MyPostsContainer />
+      <MyPosts {...this.props} />
     </main>
   }
 }
@@ -33,9 +37,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-const ProfileContainer = connect(mapStateToProps,
-  { setUserProfile, toggleIsFetching }
-)(ProfileComponent)
+let withURLDataContainerComponent = withRouter(ProfileComponent)
+
+const ProfileContainer = connect(mapStateToProps, {setUserProfile, toggleIsFetching })(withURLDataContainerComponent)
 
 
 export default ProfileContainer;

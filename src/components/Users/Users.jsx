@@ -30,7 +30,7 @@ const Users = (props) => {
               key={user.id}
               id={user.id}
               name={user.name}
-              imgSrc={user.avatarSrc}
+              imgSrc={user.photos.large}
               isFriend={user.followed}
               city={user.city} />)}
       </div>
