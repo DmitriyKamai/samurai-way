@@ -1,14 +1,50 @@
 .header {
-    display: flex;
-    align-items: center;
-    grid-area: header;
-    background-color: var(--gray-800);
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-    
-  }
-  
-  .homepageLink {
-    font-size: 3rem;
-    margin-left: 4rem;
-  }
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  grid-area: header;
+  justify-content: space-between;
+  background-color: var(--gray-800);
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+
+}
+
+.homepageLink {
+  font-size: 3rem;
+}
+
+.loginBlock {
+  display: flex;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.loginBlock a {
+  color: var(--gray-50);
+  font-size: 1.6rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--gray-900);
+  border: 1px solid var(--gray-500);
+  cursor: pointer;
+}
+
+.loginBlock a:hover {
+  background-color: var(--gray-200);
+  color: var(--gray-900);
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  outline: 1px solid var(--gray-100)
+}

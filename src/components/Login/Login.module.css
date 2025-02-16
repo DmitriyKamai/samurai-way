@@ -1,0 +1,40 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.loginForm {
+    width: 40%;
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    grid-template-areas:
+    'label1 input1'
+    'label2 input2';
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+form label {
+    font-size: 1.6rem
+}
+
+form input {
+    padding: 1rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    border: 1px solid var(--gray-500);
+    background-color: var(--gray-600);
+    color: var(--gray-50);
+}
+
+.labelLogin {
+    grid-area: label1;
+}
+
+.labelPassword {
+    grid-area: label2;
+}
