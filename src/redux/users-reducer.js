@@ -14,7 +14,7 @@ export const updateSearch = (text) => ({
   text
 });
 
-export const setUsers = (users, totalCount) => ({
+export const setUsers = (users, totalCount) => (  console.log(users), {
   type: SET_USERS,
   users,
   totalCount

@@ -8,8 +8,10 @@ import * as axios from 'axios';
 class UsersComponent extends React.Component {
   componentDidMount() {
     this.props.toggleIsFetching(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.state.currentPage}&count=${this.props.state.pageSize}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.state.currentPage}&count=${this.props.state.pageSize}`,
+    { withCredentials: true, headers: { 'API-KEY': '49ea7a73-ff67-49c4-b332-1f9bef8e582a' } })
       .then(response => {
+        console.log(response)
         this.props.toggleIsFetching(false);
         this.props.setUsers(response.data.items, response.data.totalCount);
       });
@@ -22,7 +24,8 @@ class UsersComponent extends React.Component {
   onSetPage = (pageNumber) => {
     this.props.toggleIsFetching(true);
     this.props.setPage(pageNumber)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.state.pageSize}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.state.pageSize}`,
+    { withCredentials: true, headers: { 'API-KEY': '49ea7a73-ff67-49c4-b332-1f9bef8e582a' } })
       .then(response => {
         this.props.toggleIsFetching(false);
         this.props.setUsers(response.data.items, response.data.totalCount);
@@ -31,7 +34,8 @@ class UsersComponent extends React.Component {
 
   showMore = (pageNumber) => {
     this.props.setPage(pageNumber)
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.state.pageSize}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.state.pageSize}`,
+    { withCredentials: true, headers: { 'API-KEY': '49ea7a73-ff67-49c4-b332-1f9bef8e582a' } })
       .then(response => {
         this.props.setUsers([...this.props.state.users, ...response.data.items], response.data.totalCount);
       });
