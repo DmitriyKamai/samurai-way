@@ -3,19 +3,21 @@ import * as axios from 'axios';
 import Header from "./Header";
 import { setAuthUserData, setAuthUserPhoto } from "../../redux/auth-reducer";
 import { connect } from "react-redux";
+import { authAPI, profileAPI } from "../../API/api";
 
 class HeaderContainer extends React.Component {
 
   componentDidMount() {
-    axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, { withCredentials: true })
-      .then(response => {
-        if (response.data.data.id) {
-          let { id, login, email } = response.data.data;
+    authAPI.getAuthUserData()
+      .then(data => {
+        console.log(data)
+        if (data.data.id) {
+          let { id, login, email } = data.data;
           this.props.setAuthUserData(id, login, email);
-          axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
-            .then(response => {
-              console.log(response)
-              this.props.setAuthUserPhoto(response.data.photos.small);
+          profileAPI.getProfileInfo(id)
+            .then(data => {
+              console.log(data)
+              this.props.setAuthUserPhoto(data.photos.small);
             });
         }
       });

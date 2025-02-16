@@ -8,6 +8,7 @@ import * as axios from 'axios';
 import { toggleIsFetching } from "../../redux/users-reducer";
 import { withRouter } from "react-router-dom";
 import MyPosts from "./MyPosts/MyPosts";
+import { profileAPI } from "../../API/api";
 
 
 class ProfileComponent extends React.Component {
@@ -16,11 +17,11 @@ class ProfileComponent extends React.Component {
     this.props.toggleIsFetching(true);
     let userId = this.props.match.params.userId;
     if (!userId) userId = 2;
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-      .then(response => {
+    profileAPI.getProfileInfo(userId)
+      .then(data => {
         this.props.toggleIsFetching(false);
-        this.props.setUserProfile(response.data);
-        console.log(response)
+        this.props.setUserProfile(data);
+        console.log(data)
       });
   }
   render() {
