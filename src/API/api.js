@@ -23,7 +23,19 @@ export const authAPI = {
 
 export const profileAPI = {
     getProfileInfo(id) {
-        return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
+        return instance.get(`profile/${id}`)
         .then(response => response.data)
     }
+}
+
+export const followAPI = {
+    follow(userId) {
+        return instance.post(`follow/${userId}`)
+        .then(response => response.data)
+    },
+
+    unFollow(userId) {
+        return instance.delete(`follow/${userId}`)
+        .then(response => response.data)
+    } 
 }

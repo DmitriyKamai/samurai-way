@@ -4,6 +4,7 @@ import UserItem from "./UserElement/UserItem";
 import Preloader from "../common/Preloader/Preloader";
 
 const Users = (props) => {
+  console.log(props)
   const search = React.createRef();
   let pagesCount = Math.ceil(props.state.totalUsersCount / props.state.pageSize);
   let pages = [];
@@ -27,6 +28,8 @@ const Users = (props) => {
           <Preloader /> :
           props.state.findedUsers.map(user =>
             <UserItem toggleFriend={props.toggleFriend}
+              toggleFollowingInProgress={props.toggleFollowingInProgress}
+              followingInProgress={props.state.followingInProgress}
               key={user.id}
               id={user.id}
               name={user.name}

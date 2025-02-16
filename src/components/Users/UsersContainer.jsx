@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setPage, toggleIsFetching, setUsers, toggleFriend, updateSearch } from "../../redux/users-reducer";
+import { setPage, toggleIsFetching, setUsers, toggleFriend, updateSearch, toggleFollowingInProgress } from "../../redux/users-reducer";
 import Users from "./Users";
 import * as axios from 'axios';
 import { usersAPI } from "../../API/api";
@@ -44,6 +44,7 @@ class UsersComponent extends React.Component {
       onSetPage={this.onSetPage}
       showMore={this.showMore}
       toggleFriend={this.props.toggleFriend}
+      toggleFollowingInProgress={this.props.toggleFollowingInProgress}
     />
   }
 }
@@ -55,7 +56,7 @@ const mapStateToProps = (state) => {
 }
 
 const UsersContainer = connect(mapStateToProps,
-  { toggleFriend, updateSearch, setUsers, setPage, toggleIsFetching }
+  { toggleFriend, updateSearch, setUsers, setPage, toggleIsFetching, toggleFollowingInProgress}
 )(UsersComponent)
 
 

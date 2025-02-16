@@ -3,6 +3,7 @@ const UPDATE_SEARCH = 'UPDATE-SEARCH';
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING';
+const FOLLOWING_IN_PROGRESS = 'FOLLOWING-IN-PROGRESS';
 
 export const toggleFriend = (user_id) => ({
   type: TOGGLE_FRIEND,
@@ -30,6 +31,12 @@ export const toggleIsFetching = (status) => ({
   status
 })
 
+export const toggleFollowingInProgress = (id, status) => ({
+  type: FOLLOWING_IN_PROGRESS,
+  id,
+  status
+})
+
 let initialState = {
   searchUserInfo: "",
   findedUsers: [],
@@ -38,7 +45,8 @@ let initialState = {
   pageSize: 8,
   totalUsersCount: 0,
   currentPage: 1,
-  isFetching: false
+  isFetching: false,
+  followingInProgress: []
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -76,6 +84,13 @@ const usersReducer = (state = initialState, action) => {
     case SET_CURRENT_PAGE:
       stateCopy.currentPage = action.pageNumber;
       stateCopy.findedUsers = stateCopy.users.filter(user => stateCopy.searchUserInfo ? user.name.toLowerCase().includes(stateCopy.searchUserInfo.toLowerCase()) : true);
+      return stateCopy;
+    case FOLLOWING_IN_PROGRESS:
+      if (action.status) {
+        stateCopy.followingInProgress = [...state.followingInProgress, action.id];
+      } else {
+        stateCopy.followingInProgress = state.followingInProgress.filter(id => id !== action.id)
+      }
       return stateCopy;
     default:
       stateCopy.findedUsers = stateCopy.users.filter(user => stateCopy.searchUserInfo ? user.name.toLowerCase().includes(stateCopy.searchUserInfo.toLowerCase()) : true);
