@@ -1,18 +1,9 @@
+import { profileAPI } from "../API/api";
+import { toggleIsFetching } from "./users-reducer";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
-
-export const addPostActionCreator = () => ({type: ADD_POST})
-
-export const updateNewPostTextActionCreator = (text) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-  });
-
-export const setUserProfile = (profile) => ({
-  type: SET_USER_PROFILE,
-  profile
-})
 
 let initialState = {
   id: 0,
@@ -36,7 +27,7 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST: 
+    case ADD_POST:
       if (state.newPostText.length) {
         const newPost = {
           post_id: 5,
@@ -49,18 +40,42 @@ const profileReducer = (state = initialState, action) => {
           newPostText: ""
         };
       }
-    case UPDATE_NEW_POST_TEXT: 
+    case UPDATE_NEW_POST_TEXT:
       return {
         ...state,
         newPostText: action.newText
       }
-      case SET_USER_PROFILE:
-        return {
-          ...state,
-          profile: action.profile
-        }
+    case SET_USER_PROFILE:
+      return {
+        ...state,
+        profile: action.profile
+      }
     default:
       return state;
+  }
+}
+
+export const addPostActionCreator = () => ({ type: ADD_POST })
+
+export const updateNewPostTextActionCreator = (text) => ({
+  type: UPDATE_NEW_POST_TEXT,
+  newText: text
+});
+
+export const setUserProfile = (profile) => ({
+  type: SET_USER_PROFILE,
+  profile
+})
+
+export const getProfile = (userId) => {
+  return (dispatch) => {
+        dispatch(toggleIsFetching(true));
+        if (!userId) userId = 2;
+        profileAPI.getProfileInfo(userId)
+          .then(data => {
+            dispatch(toggleIsFetching(false));
+            dispatch(setUserProfile(data));
+          });
   }
 }
 

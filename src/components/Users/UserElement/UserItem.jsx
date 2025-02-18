@@ -1,36 +1,12 @@
 import React from "react";
 import s from './UserItem.module.css';
 import { NavLink } from "react-router-dom";
-import { followAPI } from "../../../API/api";
 
 const UserItem = (props) => {
   const userItem = React.createRef();
-  const addFriend = () => {
-    props.toggleFollowingInProgress(props.id, true);
-    followAPI.follow(props.id)
-      .then(data => {
-        props.toggleFollowingInProgress(props.id, false);
-        console.log(data)
-        if (data.resultCode === 0) {
-          props.toggleFriend(props.id)
-        }
-      });
-  }
 
-  const deleteFriend = () => {
-    props.toggleFollowingInProgress(props.id, true);
-    followAPI.unFollow(props.id)
-      .then(data => {
-        props.toggleFollowingInProgress(props.id, false);
-        console.log(data)
-        if (data.resultCode === 0) {
-          props.toggleFriend(props.id)
-        }
-      });
-  }
-
-  const onToggleFriend = () => {
-    props.isFriend ? deleteFriend() : addFriend();
+  const onToggleFriend = (id) => {
+    props.isFriend ? props.deleteFriend(id) : props.addFriend(id);
   }
   const path = "/profile/" + props.id;
   return (
@@ -42,7 +18,9 @@ const UserItem = (props) => {
         <h3 className={s.userName}>{props.name}</h3>
         <div className={s.userCity}>{props.city}</div>
         <button disabled={props.followingInProgress.some(id => id === props.id)}
-        onClick={onToggleFriend}
+        onClick={() => {
+          onToggleFriend(props.id)
+        }}
         className={props.isFriend ? s.deleteFriend : s.addFriend}>
           {props.followingInProgress.some(id => id === props.id) ? '...' : props.isFriend ? 'Delete friend' : 'Add friend'}</button>
       </div>

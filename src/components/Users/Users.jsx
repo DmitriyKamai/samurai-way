@@ -2,9 +2,9 @@ import React from "react";
 import s from './Users.module.css';
 import UserItem from "./UserElement/UserItem";
 import Preloader from "../common/Preloader/Preloader";
+import { deleteFriend } from "../../redux/users-reducer";
 
 const Users = (props) => {
-  console.log(props)
   const search = React.createRef();
   let pagesCount = Math.ceil(props.state.totalUsersCount / props.state.pageSize);
   let pages = [];
@@ -27,9 +27,10 @@ const Users = (props) => {
         {props.state.isFetching ?
           <Preloader /> :
           props.state.findedUsers.map(user =>
-            <UserItem toggleFriend={props.toggleFriend}
-              toggleFollowingInProgress={props.toggleFollowingInProgress}
+            <UserItem 
               followingInProgress={props.state.followingInProgress}
+              addFriend={props.addFriend}
+              deleteFriend={props.deleteFriend}
               key={user.id}
               id={user.id}
               name={user.name}
@@ -37,7 +38,7 @@ const Users = (props) => {
               isFriend={user.followed}
               city={user.city} />)}
       </div>
-      <button className={s.showMore} onClick={() => props.showMore(props.state.currentPage + 1)}>Показать ещё</button>
+      <button className={s.showMore} onClick={() => props.showMore(props.state.currentPage + 1, props.state.pageSize, props.state.findedUsers)}>Показать ещё</button>
     </search>
   )
 }
