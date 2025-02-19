@@ -2,7 +2,6 @@ import React from "react";
 import s from './Users.module.css';
 import UserItem from "./UserElement/UserItem";
 import Preloader from "../common/Preloader/Preloader";
-import { deleteFriend } from "../../redux/users-reducer";
 
 const Users = (props) => {
   const search = React.createRef();
@@ -27,7 +26,7 @@ const Users = (props) => {
         {props.state.isFetching ?
           <Preloader /> :
           props.state.findedUsers.map(user =>
-            <UserItem 
+            <UserItem
               followingInProgress={props.state.followingInProgress}
               addFriend={props.addFriend}
               deleteFriend={props.deleteFriend}

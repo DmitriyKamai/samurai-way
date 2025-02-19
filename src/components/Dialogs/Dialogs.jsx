@@ -2,21 +2,22 @@ import React from "react";
 import s from './Dialogs.module.css';
 import MessageItem from "./MessageItem/MessageItem";
 import DialogItem from "./DialogItem/DialogItem";
+import { Redirect } from "react-router-dom";
 
 const Dialogs = (props) => {
   let dialogsElements = props.state.dialogs.map(dialog => {
     let lastMsg = props.state.messages.filter(message => message.sender_id === dialog.dialog_id || message.receiver_id === dialog.dialog_id).at(-1);
-    return <DialogItem 
-    dialog_id={dialog.dialog_id} 
-    name={dialog.name} 
-    key={dialog.dialog_id}
-    lastMsg={lastMsg.sender_id?lastMsg.message:`You: ${lastMsg.message}`} 
-    imgSrc={dialog.imgSrc} />;
+    return <DialogItem
+      dialog_id={dialog.dialog_id}
+      name={dialog.name}
+      key={dialog.dialog_id}
+      lastMsg={lastMsg.sender_id ? lastMsg.message : `You: ${lastMsg.message}`}
+      imgSrc={dialog.imgSrc} />;
   })
-  let messagesElements = props.state.messages.map(message => <MessageItem 
-    sender_id={message.sender_id} 
+  let messagesElements = props.state.messages.map(message => <MessageItem
+    sender_id={message.sender_id}
     key={message.message_id}
-    message_id={message.message_id} 
+    message_id={message.message_id}
     message={message.message}
     imgSrc={props.state.dialogs[0].imgSrc} />);
 
@@ -29,6 +30,8 @@ const Dialogs = (props) => {
     let text = newMessageElement.current.value;
     props.changeMessage(text);
   };
+
+  if (!props.isAuth) return <Redirect to={'/login'} />
 
   return (
     <main className={s.dialogs}>

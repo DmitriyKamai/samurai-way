@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { setPage, updateSearch, getUsers, showMore, addFriend, deleteFriend } from "../../redux/users-reducer";
 import Users from "./Users";
+import { Redirect } from "react-router-dom";
 
 class UsersComponent extends React.Component {
   componentDidMount() {
@@ -18,6 +19,7 @@ class UsersComponent extends React.Component {
   }
 
   render() {
+    if (!this.props.isAuth) return <Redirect to={'/login'} />
     return <Users
       onSetPage={this.onSetPage}
       onUpdateSearch={this.onUpdateSearch}
@@ -28,7 +30,8 @@ class UsersComponent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    state: state.users
+    state: state.users,
+    isAuth: state.auth.isAuth
   }
 }
 

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import s from './Profile.module.css';
 import { getProfile, setUserProfile } from "../../redux/profilePage-reducer";
 import { toggleIsFetching } from "../../redux/users-reducer";
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import MyPosts from "./MyPosts/MyPosts";
 
 
@@ -14,7 +14,8 @@ class ProfileComponent extends React.Component {
     this.props.getProfile(this.props.match.params.userId)
   }
   render() {
-    return  <main className={s.profile}>
+    if (!this.props.isAuth) return <Redirect to={'/login'} />
+    return <main className={s.profile}>
       <ProfileInfo {...this.props} />
       <MyPosts {...this.props} />
     </main>
@@ -23,13 +24,14 @@ class ProfileComponent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    state: state.profilePage
+    state: state.profilePage,
+    isAuth: state.auth.isAuth
   }
 }
 
 let withURLDataContainerComponent = withRouter(ProfileComponent)
 
-const ProfileContainer = connect(mapStateToProps, {setUserProfile, toggleIsFetching, getProfile})(withURLDataContainerComponent)
+const ProfileContainer = connect(mapStateToProps, { setUserProfile, toggleIsFetching, getProfile })(withURLDataContainerComponent)
 
 
 export default ProfileContainer;
