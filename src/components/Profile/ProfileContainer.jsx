@@ -7,6 +7,7 @@ import { toggleIsFetching } from "../../redux/users-reducer";
 import { withRouter } from "react-router-dom";
 import MyPosts from "./MyPosts/MyPosts";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 
 class ProfileComponent extends React.Component {
@@ -28,10 +29,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-let withURLDataContainerComponent = withRouter(ProfileComponent)
-let withAuthProfileComponent = withAuthRedirect(withURLDataContainerComponent)
-
-const ProfileContainer = connect(mapStateToProps, { setUserProfile, toggleIsFetching, getProfile })(withAuthProfileComponent)
-
-
-export default ProfileContainer;
+export default compose(
+  connect(mapStateToProps, { setUserProfile, toggleIsFetching, getProfile }),
+  withAuthRedirect,
+  withRouter
+)(ProfileComponent);

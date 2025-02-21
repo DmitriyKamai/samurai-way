@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { setPage, updateSearch, getUsers, showMore, addFriend, deleteFriend } from "../../redux/users-reducer";
 import Users from "./Users";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 class UsersComponent extends React.Component {
   componentDidMount() {
@@ -33,14 +34,12 @@ const mapStateToProps = (state) => {
   }
 }
 
-const withAuthUsersComponent = withAuthRedirect(UsersComponent);
-
-const UsersContainer = connect(mapStateToProps,
-  {
-    updateSearch, addFriend, deleteFriend,
-    getUsers, showMore, setPage
-  }
-)(withAuthUsersComponent)
-
-
-export default UsersContainer;
+export default compose(
+  connect(mapStateToProps,
+    {
+      updateSearch, addFriend, deleteFriend,
+      getUsers, showMore, setPage
+    }
+  ),
+  withAuthRedirect
+)(UsersComponent);
