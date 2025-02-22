@@ -2,7 +2,7 @@ import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import { connect } from "react-redux";
 import s from './Profile.module.css';
-import { getProfile, getStatus, setUserProfile } from "../../redux/profilePage-reducer";
+import { getProfile, getStatus, setUserProfile, updateStatus } from "../../redux/profilePage-reducer";
 import { toggleIsFetching } from "../../redux/users-reducer";
 import { withRouter } from "react-router-dom";
 import MyPosts from "./MyPosts/MyPosts";
@@ -31,7 +31,7 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
-  connect(mapStateToProps, { setUserProfile, toggleIsFetching, getProfile, getStatus }),
+  connect(mapStateToProps, { setUserProfile, toggleIsFetching, getProfile, getStatus, updateStatus }),
   withAuthRedirect,
   withRouter
 )(ProfileComponent);

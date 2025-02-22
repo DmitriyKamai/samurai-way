@@ -5,6 +5,7 @@ const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
+const UPDATE_STATUS = 'UPDATE-STATUS';
 
 let initialState = {
   id: 0,
@@ -24,7 +25,7 @@ let initialState = {
   ],
   newPostText: "",
   profile: null,
-  status: null
+  status: ""
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -57,6 +58,11 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         status: action.status
       }
+    case UPDATE_STATUS:
+      return {
+        ...state,
+        status: action.status
+      }
     default:
       return state;
   }
@@ -79,25 +85,42 @@ export const setStatus = (status) => ({
   status
 })
 
+export const updateStatusAC = (status) => ({
+  type: UPDATE_STATUS,
+  status
+})
+
 export const getProfile = (userId) => {
   return (dispatch) => {
-        dispatch(toggleIsFetching(true));
-        if (!userId) userId = 2;
-        profileAPI.getProfileInfo(userId)
-          .then(data => {
-            dispatch(toggleIsFetching(false));
-            dispatch(setUserProfile(data));
-          });
+    dispatch(toggleIsFetching(true));
+    if (!userId) userId = 32178;
+    profileAPI.getProfileInfo(userId)
+      .then(data => {
+        dispatch(toggleIsFetching(false));
+        dispatch(setUserProfile(data));
+      });
   }
 }
 
 export const getStatus = (userId) => {
   return (dispatch) => {
-    if(!userId) userId = 2;
+    if (!userId) userId = 32178;
     profileAPI.getStatus(userId)
-    .then(data => {
-      dispatch(setStatus(data))
-    })
+      .then(data => {
+        dispatch(setStatus(data))
+      })
+  }
+}
+
+export const updateStatus = (status) => {
+  return (dispatch) => {
+    profileAPI.updateStatus(status)
+      .then(data => {
+        if (data.resultCode === 0) {
+          dispatch(updateStatusAC(status))
+          console.log(data)
+        }
+      })
   }
 }
 
