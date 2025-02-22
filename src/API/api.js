@@ -18,6 +18,16 @@ export const authAPI = {
     getAuthUserData() {
         return instance.get(`auth/me`)
             .then(response => response.data)
+    },
+
+    login(formData) {
+        return instance.post(`auth/login`, formData)
+            .then(response => response.data)
+    },
+
+    logout() {
+        return instance.post(`auth/logout`)
+            .then(response => response.data)
     }
 }
 

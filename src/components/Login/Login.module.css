@@ -12,9 +12,11 @@
     align-items: center;
     grid-template-areas:
     'label1 input1'
-    'label2 input2';
+    'label2 input2'
+    'rememberMe rememberMe'
+    'button button';
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
 }
 
 form label {
@@ -37,4 +39,22 @@ form input {
 
 .labelPassword {
     grid-area: label2;
+}
+
+.rememberMeLabel {
+    gap: 1rem;
+    grid-area: rememberMe;
+    display: flex;
+
+}
+
+.rememberMeCheckbox {
+    width: 2rem;
+}
+
+.loginButton {
+    justify-self: center;
+    width: 100%;
+    grid-area: button;
+    font-size: 1.6rem;
 }
