@@ -13,6 +13,14 @@ class Status extends React.Component {
         editMode: false,
         status: this.props.status
     }
+    
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
 
     activateEditMode() {
         this.setState({
@@ -44,7 +52,7 @@ class Status extends React.Component {
                     <input onChange={this.onStatusChange} autoFocus onBlur={this.deactivateEditMode.bind(this)} className={s.statusInput} type="text" value={this.state.status} />
                 }
                 {!this.state.editMode &&
-                    <span onDoubleClick={ this.activateEditMode.bind(this)} className={s.status}>{this.props.status}</span>
+                    <span onDoubleClick={ this.activateEditMode.bind(this)} className={s.status}>{this.props.status || 'Set status'} </span>
                 }
             </div>
         )
