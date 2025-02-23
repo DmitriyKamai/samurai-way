@@ -2,6 +2,7 @@ import React from "react";
 import s from './Dialogs.module.css';
 import MessageItem from "./MessageItem/MessageItem";
 import DialogItem from "./DialogItem/DialogItem";
+import { Field, reduxForm } from "redux-form";
 
 const Dialogs = (props) => {
   let dialogsElements = props.state.dialogs.map(dialog => {
@@ -18,17 +19,13 @@ const Dialogs = (props) => {
     key={message.message_id}
     message_id={message.message_id}
     message={message.message}
-    imgSrc={props.state.dialogs[0].imgSrc} />);
+    imgSrc={props.state.dialogs[0].imgSrc} />
+  );
 
-  let newMessageElement = React.createRef();
-  let onAddMessage = () => {
-    props.addMessage();
-  };
-
-  let onMessageChange = () => {
-    let text = newMessageElement.current.value;
-    props.changeMessage(text);
-  };
+  const onSubmit = (formData) => {
+    console.log(formData)
+    props.addMessage(formData.newMessageBody)
+}
 
   return (
     <main className={s.dialogs}>
@@ -41,13 +38,23 @@ const Dialogs = (props) => {
         <div className={s.messagesArea}>
           {messagesElements}
         </div>
-        <div className={s.newMessage}>
-          <textarea onChange={onMessageChange} ref={newMessageElement} className={s.newMessageArea} placeholder="Write message" value={props.state.dialogs[0].unsentMessage} />
-          <button onClick={onAddMessage} className={s.sendMessage}>Send message</button>
-        </div>
+        <AddMessageReduxForm {...props} onSubmit={onSubmit} />
       </div>
     </main>
   )
 }
+
+const AddMessageForm = (props) => {
+  let newMessageElement = React.createRef();
+
+  return (
+    <form onSubmit={props.handleSubmit} className={s.newMessage}>
+      <Field name='newMessageBody' ref={newMessageElement} className={s.newMessageArea} placeholder="Write message" value={props.state.dialogs[0].unsentMessage} component={'textarea'} />
+      <button className={s.sendMessage}>Send message</button>
+    </form>
+  )
+}
+
+const AddMessageReduxForm = reduxForm({ form: 'dialogAddMessageForm' })(AddMessageForm);
 
 export default Dialogs;

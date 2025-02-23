@@ -2,7 +2,6 @@ import { profileAPI } from "../API/api";
 import { toggleIsFetching } from "./users-reducer";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 const SET_STATUS = 'SET-STATUS';
 const UPDATE_STATUS = 'UPDATE-STATUS';
@@ -23,7 +22,6 @@ let initialState = {
       post_id: 3, likesCount: 223, message: 'Сегодня встречался с Дашей за гаражами'
     }
   ],
-  newPostText: "",
   profile: null,
   status: ""
 }
@@ -31,22 +29,17 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
-      if (state.newPostText.length) {
+      if (action.newPost.length) {
         const newPost = {
           post_id: 5,
           likesCount: 0,
-          message: state.newPostText
+          message: action.newPost
         };
         return {
           ...state,
           posts: [...state.posts, newPost],
           newPostText: ""
         };
-      }
-    case UPDATE_NEW_POST_TEXT:
-      return {
-        ...state,
-        newPostText: action.newText
       }
     case SET_USER_PROFILE:
       return {
@@ -68,12 +61,8 @@ const profileReducer = (state = initialState, action) => {
   }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST })
+export const addPostActionCreator = (newPost) => ({ type: ADD_POST, newPost })
 
-export const updateNewPostTextActionCreator = (text) => ({
-  type: UPDATE_NEW_POST_TEXT,
-  newText: text
-});
 
 export const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,

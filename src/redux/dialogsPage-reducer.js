@@ -1,12 +1,7 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE = 'UPDATE-NEW-MESSAGE';
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
+export const addMessageActionCreator = (message) => ({type: ADD_MESSAGE, message});
 
-export const updateNewMessageActionCreator = (text) => ({
-  type: UPDATE_NEW_MESSAGE,
-  newMessage: text
-})
 
 let initialState = {
   messages: [
@@ -81,12 +76,12 @@ const dialogsReducer = (state = initialState, action) => {
   let stateCopy;
   switch (action.type) {
     case ADD_MESSAGE:
-      if (state.dialogs[0].unsentMessage.length) {
+      if (action.message.length) {
         const newMessage = {
           message_id: 3,
           receiver_id: 1,
           sender_id: 0,
-          message: state.dialogs[0].unsentMessage
+          message: action.message
         };
         stateCopy = {
           ...state,
@@ -95,13 +90,6 @@ const dialogsReducer = (state = initialState, action) => {
         }
         stateCopy.dialogs[0].unsentMessage = "";
       }
-      return stateCopy;
-    case UPDATE_NEW_MESSAGE:
-      stateCopy = {
-        ...state,
-        dialogs: [...state.dialogs]
-      }
-      stateCopy.dialogs[0].unsentMessage = action.newMessage;
       return stateCopy;
     default:
       return state;
