@@ -45,7 +45,6 @@ class Status extends React.Component {
     
 
     render() {
-        console.log(this.props)
         return (
             <div className={s.statusBlock}>
                 {this.state.editMode &&

@@ -1,6 +1,6 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
 
-export const addMessageActionCreator = (message) => ({type: ADD_MESSAGE, message});
+export const addMessageActionCreator = (message) => ({ type: ADD_MESSAGE, message });
 
 
 let initialState = {
@@ -49,26 +49,26 @@ let initialState = {
     }
   ],
   dialogs:
-   [{
+    [{
       dialog_id: 1,
       name: "Сергей Петушенко",
       imgSrc: 'https://i.pinimg.com/236x/c8/cc/24/c8cc24bba37a25c009647b8875aae0e3.jpg',
       unsentMessage: "",
-      messages: [1,2]
+      messages: [1, 2]
     },
     {
       dialog_id: 2,
       name: "Лёша Вонючка",
       imgSrc: "https://s1.bloknot-novorossiysk.ru/thumb/850x0xcut/upload/iblock/e84/omyb57mq3bau1kef8z8r9cjxv89x032m/WhatsApp-Image-2023_08_08-at-12.39.20.jpeg",
       unsentMessage: "",
-      messages: [3,4,5]
+      messages: [3, 4, 5]
     },
     {
       dialog_id: 3,
       name: "Даша Рублёва",
       imgSrc: "https://i.ytimg.com/vi/Deazgd2DRlI/maxresdefault.jpg",
       unsentMessage: "",
-      messages: [6,7]
+      messages: [6, 7]
     }],
 }
 
@@ -76,20 +76,18 @@ const dialogsReducer = (state = initialState, action) => {
   let stateCopy;
   switch (action.type) {
     case ADD_MESSAGE:
-      if (action.message.length) {
-        const newMessage = {
-          message_id: 3,
-          receiver_id: 1,
-          sender_id: 0,
-          message: action.message
-        };
-        stateCopy = {
-          ...state,
-          dialogs: [...state.dialogs],
-          messages: [...state.messages, newMessage]
-        }
-        stateCopy.dialogs[0].unsentMessage = "";
+      const newMessage = {
+        message_id: 3,
+        receiver_id: 1,
+        sender_id: 0,
+        message: action.message
+      };
+      stateCopy = {
+        ...state,
+        dialogs: [...state.dialogs],
+        messages: [...state.messages, newMessage]
       }
+      stateCopy.dialogs[0].unsentMessage = "";
       return stateCopy;
     default:
       return state;

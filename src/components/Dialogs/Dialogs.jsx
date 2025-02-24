@@ -3,6 +3,8 @@ import s from './Dialogs.module.css';
 import MessageItem from "./MessageItem/MessageItem";
 import DialogItem from "./DialogItem/DialogItem";
 import { Field, reduxForm } from "redux-form";
+import { CustomField } from "../common/FormControls/FormsControls";
+import { maxLength10, required } from "../../utils/validators/validators";
 
 const Dialogs = (props) => {
   let dialogsElements = props.state.dialogs.map(dialog => {
@@ -49,7 +51,7 @@ const AddMessageForm = (props) => {
 
   return (
     <form onSubmit={props.handleSubmit} className={s.newMessage}>
-      <Field name='newMessageBody' ref={newMessageElement} className={s.newMessageArea} placeholder="Write message" value={props.state.dialogs[0].unsentMessage} component={'textarea'} />
+      <Field validate={[required, maxLength10]} fieldType='textarea' name='newMessageBody' ref={newMessageElement} className={s.newMessageArea} placeholder="Write message" value={props.state.dialogs[0].unsentMessage} component={CustomField} />
       <button className={s.sendMessage}>Send message</button>
     </form>
   )

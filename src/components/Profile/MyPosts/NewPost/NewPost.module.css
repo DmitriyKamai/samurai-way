@@ -18,20 +18,8 @@
     gap: 1rem;
   }
   
- .newPostArea {
-    padding: 1rem;
-    width: 100%;
-    border-radius: 0.5rem;
-    font-size: 1.6rem;
-    border: 1px solid var(--gray-500);
-    resize: none;
-    background-color: var(--gray-600);
-    color: var(--gray-50);
-  }
   
- .newPostArea::placeholder {
-    color: var(--gray-50);
-  }
+
   
   .sendNewPost {
     font-size: 1.6rem;
