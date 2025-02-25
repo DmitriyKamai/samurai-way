@@ -22,7 +22,7 @@ const Login = (props) => {
 }
 
 const LoginForm = (props) => {
-
+    console.log(props)
     return (
         <form onSubmit={props.handleSubmit} className={s.loginForm}>
             <label htmlFor="email" className={s.labelLogin}>Login:</label>
@@ -34,6 +34,7 @@ const LoginForm = (props) => {
                 Remember me
             </label>
             <button className={s.loginButton}>Sign in</button>
+            <div className={s.summaryError}>{props.error}</div>
         </form>
     )
 }

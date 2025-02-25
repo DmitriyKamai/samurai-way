@@ -5,7 +5,6 @@ import Status from "./Status";
 
 
 const ProfileInfo = (props) => {
-  console.log(props)
   if (!props.state.profile) {
     return <Preloader />
   }

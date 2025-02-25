@@ -80,7 +80,6 @@ export const updateStatusAC = (status) => ({
 export const getProfile = (userId) => {
   return (dispatch) => {
     dispatch(toggleIsFetching(true));
-    if (!userId) userId = 32178;
     profileAPI.getProfileInfo(userId)
       .then(data => {
         dispatch(toggleIsFetching(false));
@@ -91,7 +90,6 @@ export const getProfile = (userId) => {
 
 export const getStatus = (userId) => {
   return (dispatch) => {
-    if (!userId) userId = 32178;
     profileAPI.getStatus(userId)
       .then(data => {
         dispatch(setStatus(data))

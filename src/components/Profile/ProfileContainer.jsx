@@ -6,15 +6,18 @@ import { getProfile, getStatus, setUserProfile, updateStatus } from "../../redux
 import { toggleIsFetching } from "../../redux/users-reducer";
 import { withRouter } from "react-router-dom";
 import MyPosts from "./MyPosts/MyPosts";
-import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 
 
 class ProfileComponent extends React.Component {
-
   componentDidMount() {
-    this.props.getProfile(this.props.match.params.userId)
-    this.props.getStatus(this.props.match.params.userId)
+    let userId = this.props.match.params.userId;
+    if (!userId && this.props.authorisedUserId) {
+      userId = this.props.authorisedUserId;
+    }
+    this.props.getProfile(userId)
+    this.props.getStatus(userId)
+      
   }
   render() {
     return <main className={s.profile}>
@@ -27,11 +30,12 @@ class ProfileComponent extends React.Component {
 const mapStateToProps = (state) => {
   return {
     state: state.profilePage,
+    authorisedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
   }
 }
 
 export default compose(
   connect(mapStateToProps, { setUserProfile, toggleIsFetching, getProfile, getStatus, updateStatus }),
-  withAuthRedirect,
   withRouter
 )(ProfileComponent);

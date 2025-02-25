@@ -14,9 +14,10 @@
     'label1 input1'
     'label2 input2'
     'rememberMe rememberMe'
-    'button button';
+    'button button'
+    'errors errors';
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
 
 form label {
@@ -57,4 +58,11 @@ form input {
     width: 100%;
     grid-area: button;
     font-size: 1.6rem;
+}
+
+.summaryError {
+    grid-area: errors;
+    font-size: 1.6rem;
+    color: red;
+    text-align: center;
 }
