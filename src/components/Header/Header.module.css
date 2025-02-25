@@ -48,3 +48,7 @@
   border-radius: 50%;
   outline: 1px solid var(--gray-100)
 }
+
+.logout {
+  cursor: pointer;
+}
