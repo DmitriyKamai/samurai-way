@@ -14,6 +14,8 @@ class ProfileComponent extends React.Component {
     let userId = this.props.match.params.userId;
     if (!userId && this.props.authorisedUserId) {
       userId = this.props.authorisedUserId;
+    } else {
+      this.props.history.push('/login')
     }
     this.props.getProfile(userId)
     this.props.getStatus(userId)
