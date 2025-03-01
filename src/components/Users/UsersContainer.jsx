@@ -4,6 +4,7 @@ import { setPage, updateSearch, getUsers, showMore, addFriend, deleteFriend } fr
 import Users from "./Users";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
+import { getUsersSelector } from "../../redux/selectors";
 
 class UsersComponent extends React.Component {
   componentDidMount() {
@@ -16,7 +17,6 @@ class UsersComponent extends React.Component {
 
   onSetPage = (pageNumber) => {
     this.props.getUsers(pageNumber, this.props.state.pageSize);
-    this.props.setPage(pageNumber)
   }
 
   render() {
@@ -30,7 +30,7 @@ class UsersComponent extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    state: state.users,
+    state: getUsersSelector(state),
   }
 }
 

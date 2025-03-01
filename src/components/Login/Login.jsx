@@ -9,10 +9,8 @@ import { compose } from 'redux';
 import { withHaveAuthRedirect } from '../../hoc/withAuthRedirect';
 
 const Login = (props) => {
-    console.log(props)
     const onSubmit = (formData) => {
         props.login(formData)
-        console.log(formData)
     }
     return (
         <main className={s.login}>
@@ -22,7 +20,6 @@ const Login = (props) => {
 }
 
 const LoginForm = (props) => {
-    console.log(props)
     return (
         <form onSubmit={props.handleSubmit} className={s.loginForm}>
             <label htmlFor="email" className={s.labelLogin}>Login:</label>

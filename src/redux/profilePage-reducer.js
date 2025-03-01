@@ -103,7 +103,6 @@ export const updateStatus = (status) => {
       .then(data => {
         if (data.resultCode === 0) {
           dispatch(updateStatusAC(status))
-          console.log(data)
         }
       })
   }

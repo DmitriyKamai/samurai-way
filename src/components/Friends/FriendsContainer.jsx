@@ -3,6 +3,7 @@ import Friends from "./Friends";
 import { connect } from "react-redux";
 import * as axios from 'axios';
 import { setAuthUserData } from "../../redux/auth-reducer";
+import { getUsersSelector } from "../../redux/selectors";
 
 
 class FriendsContainer extends React.Component {
@@ -14,7 +15,7 @@ class FriendsContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        state: state.users,
+        state: getUsersSelector(state),
     }
 }
 

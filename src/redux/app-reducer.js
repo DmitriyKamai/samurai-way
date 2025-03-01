@@ -1,4 +1,3 @@
-import { authAPI, profileAPI } from "../API/api";
 import { getAuthData } from "./auth-reducer";
 
 const SET_INITIALIZED = 'SET-INITIALIZED';
