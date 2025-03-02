@@ -12,14 +12,9 @@ import { getAuthSelector, getProfilePageSelector } from "../../redux/selectors";
 
 class ProfileComponent extends React.Component {
   componentDidMount() {
-    console.log(this.props)
     let userId = this.props.match.params.userId;
-    console.log(this.props.match.params.userId)
-    console.log(userId)
     if (!userId) {
-      console.log(userId)
       userId = this.props.authorisedUserId;
-      console.log(userId)
       if (!userId) {
         this.props.history.push('/login')
       }
