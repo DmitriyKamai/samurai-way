@@ -26,7 +26,7 @@ class ProfileComponent extends React.Component {
   render() {
     return <main className={s.profile}>
       <ProfileInfo {...this.props} />
-      <MyPosts {...this.props} />
+      <MyPosts {...this.props.state} />
     </main>
   }
 }
